@@ -1,7 +1,6 @@
-import store from "../redux/config/store";
-import "../../assets/app.css";
-import "../../assets/modal.css";
-import { Provider } from "react-redux";
+import "../assets/app.css";
+import "../assets/modal.css";
+import CommonModal from "../components/modal/CommonModal";
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +9,7 @@ type Props = {
 const Layouts = ({children}: Props) => {
 
   return (
-    <Provider store={store}>
+    <>
     <div className="container">
       <div className="form-box">
         <h2 className="title">회원가입</h2>
@@ -23,7 +22,8 @@ const Layouts = ({children}: Props) => {
         <button className="btn full">회원가입</button>
       </div>
     </div>
-    </Provider>
+    <CommonModal/>
+    </>
   );
 };
 
