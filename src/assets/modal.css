@@ -1,0 +1,68 @@
+/* 모달 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 380px;
+}
+
+.modal h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.modal input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* 달력 */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.calendar th,
+.calendar td {
+  width: 14.2%;
+  height: 40px;
+  text-align: center;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.calendar td.empty {
+  background: #f9f9f9;
+  cursor: default;
+}
+
+.calendar td.day:hover {
+  background: #e0e7ff;
+}
