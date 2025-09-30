@@ -5,7 +5,7 @@ import { openModalWithPromise } from "../redux/modules/modals";
 
 // 모달로 사용할 컴포넌트들
 import Calendar from "../components/Calendar";
-import AddressModal from "../components/Address";
+import Address from "../components/Address";
 
 interface FormState {
   name: string;
@@ -18,7 +18,7 @@ interface FormState {
 const SignupPage = (): React.JSX.Element => {
   /** useDispatch에 AppDispatch 타입을 적용하여 thunk 액션을 지원 **/
   const dispatch = useDispatch<AppDispatch>();
-  
+
   const [form, setForm] = useState<FormState>({name: "", id: "", password: "", address: "", birthday: ""});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,9 +29,12 @@ const SignupPage = (): React.JSX.Element => {
   // 주소지 찾기 버튼 클릭 핸들러
   const handleAddressClick = async () => {
     const result = await dispatch(openModalWithPromise({
-      component: AddressModal,
+      component: Address,
       title: '주소지 찾기',
+      props: { address: form.address }
     }));
+
+    console.log('address result', result);
 
     if (result) {
       setForm({ ...form, address: result });
