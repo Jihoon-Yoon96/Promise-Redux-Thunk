@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, ThunkAction, Action } from "@reduxjs/toolkit";
 import React from "react";
 import { RootState } from "../config/store";
-import { log } from "console";
 
 // 스토어에 저장될 개별 모달의 타입
 export interface ModalState {

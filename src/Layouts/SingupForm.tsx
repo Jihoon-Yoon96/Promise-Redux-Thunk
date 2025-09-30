@@ -22,6 +22,7 @@ const Layouts = ({children}: Props) => {
         <button className="btn full">회원가입</button>
       </div>
     </div>
+    {/* 공통 모달 레이아웃 주입 */}
     <CommonModal/>
     </>
   );

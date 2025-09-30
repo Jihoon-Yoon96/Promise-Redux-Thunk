@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 // Calendar 컴포넌트가 받을 props 타입
 interface CalendarProps {
@@ -18,7 +18,10 @@ const Calendar = (props: CalendarProps): React.JSX.Element => {
     return new Date(year, month + 1, 0).getDate();
   };
 
-  const generateCalendar = (): (number | null)[][] => {
+  // currentMonth가 변경될 때만 달력 데이터를 다시 계산 (useMemo)
+  const calendarWeeks = useMemo(() => {
+    console.log('Generating calendar...');
+
     const year = currentMonth.getFullYear();
     const month = currentMonth.getMonth();
     const firstDay = new Date(year, month, 1).getDay();
@@ -39,15 +42,14 @@ const Calendar = (props: CalendarProps): React.JSX.Element => {
     }
     if (days.length > 0) weeks.push(days);
     return weeks;
-  };
+  }, [currentMonth]);
 
   const handleDateClick = (day: number | null): void => {
     if (!day) return;
     const year = currentMonth.getFullYear();
     const month = currentMonth.getMonth() + 1;
     const date = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-    props.close(date);
-    // onDateClick(date); // 부모 컴포넌트로 선택된 날짜 전달
+    props.close(date); // 선택된 날짜를 부모 컴포넌트로 전달하고 모달 닫기 (Promise resolve 처리)
   };
 
   return (
@@ -80,7 +82,7 @@ const Calendar = (props: CalendarProps): React.JSX.Element => {
           </tr>
         </thead>
         <tbody>
-          {generateCalendar().map((week, i) => (
+          {calendarWeeks.map((week, i) => (
             <tr key={i}>
               {week.map((day, j) => (
                 <td

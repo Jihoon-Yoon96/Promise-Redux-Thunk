@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/config/store"; // AppDispatch 타입을 가져옵니다.
+import { AppDispatch } from "../redux/config/store";
 import { openModalWithPromise } from "../redux/modules/modals";
 
 // 모달로 사용할 컴포넌트들
 import Calendar from "../components/Calendar";
-import AddressModal from "../components/Address"; // 경로 수정: Address -> AddressModal
+import AddressModal from "../components/Address";
 
 interface FormState {
   name: string;
@@ -16,11 +16,10 @@ interface FormState {
 }
 
 const SignupPage = (): React.JSX.Element => {
-  // useDispatch에 AppDispatch 타입을 적용하여 thunk 액션을 지원하도록 합니다.
+  /** useDispatch에 AppDispatch 타입을 적용하여 thunk 액션을 지원 **/
   const dispatch = useDispatch<AppDispatch>();
-  const [form, setForm] = useState<FormState>({
-    name: "", id: "", password: "", address: "", birthday: "",
-  });
+  
+  const [form, setForm] = useState<FormState>({name: "", id: "", password: "", address: "", birthday: ""});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -29,7 +28,6 @@ const SignupPage = (): React.JSX.Element => {
 
   // 주소지 찾기 버튼 클릭 핸들러
   const handleAddressClick = async () => {
-    // dispatch가 Promise를 반환하는 것을 TypeScript가 이제 이해합니다.
     const result = await dispatch(openModalWithPromise({
       component: AddressModal,
       title: '주소지 찾기',
